@@ -1,0 +1,844 @@
+/* Reset basico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: #0f172a;
+  color: #e2e8f0;
+  min-height: 100vh;
+}
+
+.dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* ==========================================
+   HEADER
+   ========================================== */
+.dashboard-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 30px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+  text-align: center;
+}
+
+.dashboard-header h1 {
+  font-size: 2.2rem;
+  margin-bottom: 8px;
+}
+
+.dashboard-header p {
+  font-size: 1rem;
+  opacity: 0.95;
+}
+
+/* ==========================================
+   UPLOAD DE CSV
+   ========================================== */
+.upload-container {
+  background: #1e293b;
+  padding: 24px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  border: 1px solid #334155;
+}
+
+.upload-container h3 {
+  margin-bottom: 16px;
+  color: #cbd5e1;
+  font-size: 1.1rem;
+}
+
+.upload-conteudo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.btn-upload {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.2s;
+  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);
+}
+
+.btn-upload:hover:not(:disabled) {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(16, 185, 129, 0.4);
+}
+
+.btn-upload:disabled {
+  background: #475569;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.upload-info {
+  color: #94a3b8;
+  font-size: 0.85rem;
+}
+
+.upload-info code {
+  background: #0f172a;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  color: #fbbf24;
+}
+
+.upload-mensagem {
+  padding: 12px 16px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  width: 100%;
+}
+
+.upload-sucesso {
+  background: #064e3b;
+  color: #6ee7b7;
+  border: 1px solid #065f46;
+}
+
+.upload-erro {
+  background: #7f1d1d;
+  color: #fca5a5;
+  border: 1px solid #991b1b;
+}
+
+/* ==========================================
+   FILTROS
+   ========================================== */
+.filtros-container {
+  background: #1e293b;
+  padding: 24px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  border: 1px solid #334155;
+}
+
+.filtros-container h3 {
+  margin-bottom: 16px;
+  color: #cbd5e1;
+  font-size: 1.1rem;
+}
+
+.filtros-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  align-items: end;
+}
+
+.filtro-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.filtro-item label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #94a3b8;
+}
+
+.filtro-item input,
+.filtro-item select {
+  padding: 10px 12px;
+  border: 1px solid #475569;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background: #0f172a;
+  color: #e2e8f0;
+  transition: all 0.2s;
+}
+
+.filtro-item input::placeholder {
+  color: #64748b;
+}
+
+.filtro-item input:focus,
+.filtro-item select:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}
+
+.filtro-item select option {
+  background: #1e293b;
+  color: #e2e8f0;
+}
+
+.btn-limpar {
+  padding: 10px 20px;
+  background: #dc2626;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background 0.2s;
+}
+
+.btn-limpar:hover {
+  background: #b91c1c;
+}
+
+/* ==========================================
+   CONTEUDO PRINCIPAL (TABELA)
+   ========================================== */
+.dashboard-conteudo {
+  background: #1e293b;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  border: 1px solid #334155;
+}
+
+.dashboard-conteudo h2 {
+  margin-bottom: 8px;
+  color: #f1f5f9;
+  font-size: 1.4rem;
+}
+
+.info-total {
+  color: #94a3b8;
+  margin-bottom: 16px;
+  font-size: 0.95rem;
+}
+
+.info-total strong {
+  color: #e2e8f0;
+}
+
+/* ==========================================
+   TABELA
+   ========================================== */
+.tabela-container {
+  overflow-x: auto;
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.tabela thead {
+  background: #0f172a;
+  border-bottom: 2px solid #475569;
+}
+
+.tabela th {
+  padding: 12px;
+  text-align: left;
+  font-weight: 600;
+  color: #cbd5e1;
+  white-space: nowrap;
+}
+
+.tabela td {
+  padding: 12px;
+  border-bottom: 1px solid #334155;
+  color: #e2e8f0;
+}
+
+.tabela tbody tr:hover {
+  background: #0f172a;
+  transition: background 0.15s;
+}
+
+/* ==========================================
+   MENSAGENS DE ESTADO
+   ========================================== */
+.mensagem-vazia {
+  text-align: center;
+  padding: 40px;
+  color: #64748b;
+  font-style: italic;
+}
+
+.erro {
+  color: #fca5a5;
+  background: #7f1d1d;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  border: 1px solid #991b1b;
+}
+
+.carregando {
+  color: #818cf8;
+  padding: 12px;
+  font-style: italic;
+}
+
+/* ==========================================
+   FORMULARIO DE CADASTRO
+   ========================================== */
+.formulario-container {
+  background: #1e293b;
+  padding: 24px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  border: 1px solid #334155;
+}
+
+.formulario-container h3 {
+  margin-bottom: 16px;
+  color: #cbd5e1;
+  font-size: 1.1rem;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.formulario-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.form-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-item label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #94a3b8;
+}
+
+.form-item input,
+.form-item select {
+  padding: 10px 12px;
+  border: 1px solid #475569;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background: #0f172a;
+  color: #e2e8f0;
+  transition: all 0.2s;
+}
+
+.form-item input::placeholder {
+  color: #64748b;
+}
+
+.form-item input:focus,
+.form-item select:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}
+
+.form-item select option {
+  background: #1e293b;
+  color: #e2e8f0;
+}
+
+.formulario-acoes {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-cadastrar {
+  padding: 12px 28px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.2s;
+  box-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
+}
+
+.btn-cadastrar:hover:not(:disabled) {
+  background: linear-gradient(135deg, #5568d3 0%, #6a4191 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.4);
+}
+
+.btn-cadastrar:disabled {
+  background: #475569;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.form-mensagem {
+  padding: 12px 16px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+.form-sucesso {
+  background: #064e3b;
+  color: #6ee7b7;
+  border: 1px solid #065f46;
+}
+
+.form-erro {
+  background: #7f1d1d;
+  color: #fca5a5;
+  border: 1px solid #991b1b;
+}
+
+/* ==========================================
+   RESUMO POR ESTADO
+   ========================================== */
+.resumo-container {
+  background: #1e293b;
+  padding: 24px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  border: 1px solid #334155;
+}
+
+.resumo-container h3 {
+  margin-bottom: 8px;
+  color: #cbd5e1;
+  font-size: 1.1rem;
+}
+
+.resumo-info {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+}
+
+.resumo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.resumo-card {
+  background: #0f172a;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #334155;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.resumo-card:hover {
+  border-color: #667eea;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+.resumo-estado {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #818cf8;
+  margin-bottom: 4px;
+}
+
+.resumo-doses {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin-bottom: 4px;
+}
+
+.resumo-label {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.resumo-registros {
+  font-size: 0.8rem;
+  color: #64748b;
+  border-top: 1px solid #334155;
+  padding-top: 6px;
+  margin-top: 4px;
+}
+
+/* ==========================================
+   CHECKBOX E LINHA SELECIONADA
+   ========================================== */
+.th-checkbox,
+.td-checkbox {
+  width: 40px;
+  text-align: center;
+}
+
+.checkbox-registro {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #667eea;
+}
+
+.tabela tbody tr.linha-selecionada {
+  background: rgba(102, 126, 234, 0.15);
+  border-left: 3px solid #667eea;
+}
+
+.tabela tbody tr.linha-selecionada:hover {
+  background: rgba(102, 126, 234, 0.2);
+}
+
+/* ==========================================
+   BARRA DE ACOES (acima da tabela)
+   ========================================== */
+.barra-acoes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+  border: 1px solid #667eea;
+  padding: 14px 20px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.barra-acoes-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #e2e8f0;
+  font-size: 0.95rem;
+}
+
+.barra-acoes-icon {
+  background: #667eea;
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.barra-acoes-botoes {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-acao {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.btn-acao-atualizar {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+}
+
+.btn-acao-atualizar:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  transform: translateY(-1px);
+}
+
+.btn-acao-deletar {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+}
+
+.btn-acao-deletar:hover {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  transform: translateY(-1px);
+}
+
+.btn-acao-fechar {
+  background: #475569;
+  color: white;
+  padding: 8px 12px;
+}
+
+.btn-acao-fechar:hover {
+  background: #64748b;
+}
+
+/* ==========================================
+   BOTAO CANCELAR (formulario)
+   ========================================== */
+.formulario-acoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.btn-cancelar {
+  padding: 12px 24px;
+  background: #475569;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.btn-cancelar:hover:not(:disabled) {
+  background: #64748b;
+  transform: translateY(-1px);
+}
+
+.btn-cadastrar:disabled {
+  background: #475569;
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* ==========================================
+   MODAL DE CONFIRMACAO
+   ========================================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-container {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 0;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid #334155;
+}
+
+.modal-header h3 {
+  color: #fbbf24;
+  font-size: 1.2rem;
+}
+
+.modal-body {
+  padding: 24px;
+}
+
+.modal-body p {
+  color: #e2e8f0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 24px;
+  border-top: 1px solid #334155;
+}
+
+.btn-modal {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.2s;
+}
+
+.btn-modal:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-modal-cancelar {
+  background: #475569;
+  color: white;
+}
+
+.btn-modal-cancelar:hover:not(:disabled) {
+  background: #64748b;
+}
+
+.btn-modal-confirmar {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+}
+
+.btn-modal-confirmar:hover:not(:disabled) {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+}
+
+/* ==========================================
+   MENSAGEM GLOBAL (sucesso/erro)
+   ========================================== */
+.mensagem-global {
+  background: #064e3b;
+  color: #6ee7b7;
+  border: 1px solid #065f46;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  font-size: 0.95rem;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================
+   SISTEMA DE ABAS
+   ========================================== */
+.abas-container {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  padding: 8px;
+  background: #1e293b;
+  border-radius: 12px;
+  border: 1px solid #334155;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.aba-botao {
+  flex: 1;
+  min-width: 150px;
+  padding: 14px 20px;
+  background: transparent;
+  color: #94a3b8;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.25s ease;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.aba-botao:hover:not(.aba-ativa) {
+  background: rgba(102, 126, 234, 0.1);
+  color: #e2e8f0;
+}
+
+/* Aba ativa - cada cor pra um tipo */
+.aba-ativa.aba-roxo {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.aba-ativa.aba-verde {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+.aba-ativa.aba-azul {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.aba-ativa.aba-laranja {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+}
+
+/* Conteudo da aba - animacao de entrada */
+.conteudo-aba {
+  animation: fadeInAba 0.3s ease-out;
+}
+
+@keyframes fadeInAba {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsividade pra telas pequenas */
+@media (max-width: 768px) {
+  .abas-container {
+    flex-direction: column;
+  }
+
+  .aba-botao {
+    min-width: 100%;
+  }
+}
