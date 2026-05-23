@@ -3,6 +3,12 @@ function Tabela({ registros, registroSelecionadoId, onSelecionarRegistro }) {
         return <p className="mensagem-vazia">Nenhum registro encontrado.</p>;
     }
 
+    const formatarData = (dataString) => {
+        if (!dataString) return '';
+        const [ano, mes, dia] = dataString.split('-');
+        return `${dia}/${mes}/${ano}`;
+    };
+
     return (
         <div className="tabela-container">
             <table className="tabela">
@@ -40,7 +46,7 @@ function Tabela({ registros, registroSelecionadoId, onSelecionarRegistro }) {
                             <td>{registro.vacina}</td>
                             <td>{registro.dose}</td>
                             <td>{registro.quantidadeAplicada.toLocaleString('pt-BR')}</td>
-                            <td>{new Date(registro.dataRegistro).toLocaleDateString('pt-BR')}</td>
+                            <td>{formatarData(registro.dataRegistro)}</td>
                         </tr>
                     );
                 })}
